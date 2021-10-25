@@ -20,8 +20,9 @@ public class ServerManager : MonoBehaviourPun
     // Update is called once per frame
     void Update()
     {
-        
+
     }
+
     [PunRPC]
     public void InitializedPlayer(Player client)
     {
@@ -43,6 +44,11 @@ public class ServerManager : MonoBehaviourPun
     public void SetPlayer(int ID)
     {
         PhotonView pv = PhotonView.Find(ID);
-        car character = pv.GetComponent<Character>();
+        if (pv == null) return;
+        var character = pv.GetComponent<Character>();
+        if (character == null) return;
+        var controller = GameObject.FindObjectOfType<Controller>();
+        if (controller == null) return;
+        controller.SetCharacter = character;
     }
 }

@@ -22,6 +22,6 @@ public class NetManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Gameplay"):
+        PhotonNetwork.LoadLevel("Gameplay");
     }
 }

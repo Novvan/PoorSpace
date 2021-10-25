@@ -6,15 +6,22 @@ using Photon.Realtime;
 
 public class Character : MonoBehaviourPun
 {
+    [SerializeField] private float _speed;
+    private Rigidbody2D _rb;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        _rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+    public void Move(Vector2 dir) 
+    {
+        dir = dir.normalized;
+        _rb.velocity = new Vector2(dir.x * _speed, dir.y * _speed);
     }
 }
