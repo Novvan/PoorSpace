@@ -150,9 +150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fa08abc2e32914481b9ae332ff6a0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemies: []
-  posMin: {x: 0, y: 0}
-  posMax: {x: 0, y: 0}
+  _enemies:
+  - {fileID: 2957400050710461259, guid: 38332139906c74c40982a6abb7ba37e1, type: 3}
+  posMin: {x: -5, y: 0}
+  posMax: {x: 5, y: 0}
   maxEnemies: 5
   timeSpawn: 3
 --- !u!4 &1096418
@@ -163,7 +164,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1096416}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.8606853, y: 0.30374587, z: -0.40492624}
+  m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -343,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1363552537}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.8606853, y: 0.30374587, z: -0.40492624}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

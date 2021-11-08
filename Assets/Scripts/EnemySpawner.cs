@@ -6,12 +6,11 @@ using Photon.Realtime;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField]
-    Enemy[] _enemies;
-    public Vector2 posMin;
-    public Vector2 posMax;
-    public int maxEnemies = 5;
-    public float timeSpawn = 3;
+    [SerializeField] Enemy[] _enemies;
+    [SerializeField] Vector2 posMin;
+    [SerializeField] Vector2 posMax;
+    [SerializeField] int maxEnemies = 5;
+    [SerializeField] float timeSpawn = 3;
     int _currentEnemies;
     void Start()
     {
@@ -21,14 +20,14 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    public Enemy GetPokemonRandom(Enemy[] enemies)
+    public Enemy GetEnemyRandom(Enemy[] enemies)
     {
         return enemies[Random.Range(0, enemies.Length - 1)];
     }
 
     public Vector2 GetRandomPos(Vector2 min, Vector3 max)
     {
-        return new Vector2(Random.Range(min.x, max.x), Random.Range(min.y, max.y));
+        return new Vector2(gameObject.transform.position.x + Random.Range(min.x, max.x), gameObject.transform.position.y + Random.Range(min.y, max.y));
     }
     IEnumerator WaitToSpawn(float time)
     {
@@ -43,7 +42,7 @@ public class EnemySpawner : MonoBehaviour
     }
     public void Spawn()
     {
-        Enemy enemy = GetPokemonRandom(_enemies);
+        Enemy enemy = GetEnemyRandom(_enemies);
         Vector2 pos = GetRandomPos(posMin, posMax);
 
         GameObject obj = PhotonNetwork.Instantiate(enemy.name, pos, Quaternion.identity);
@@ -51,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
         newEnemy.OnDestroyPoke += OnEnemyDestroy;
         _currentEnemies++;
     }
-    void OnEnemyDestroy(Enemy poke)
+    void OnEnemyDestroy(Enemy enemy)
     {
         _currentEnemies--;
     }
