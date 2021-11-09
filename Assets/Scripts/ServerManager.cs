@@ -7,20 +7,41 @@ using Photon.Realtime;
 public class ServerManager : MonoBehaviourPun
 {
     [SerializeField] GameObject _prefab;
-    private Player _server;
-    private Dictionary<Player, Character> _characters = new Dictionary<Player, Character>();
+    Player _server;
+    Dictionary<Player, Character> _characters = new Dictionary<Player, Character>();
     public Player GetServer => _server;
 
-    // Start is called before the first frame update
     void Awake()
     {
         _server = PhotonNetwork.MasterClient;
     }
-
-    // Update is called once per frame
-    void Update()
+    [PunRPC]
+    public void RequestRegisterPlayer(Player client, int ID)
     {
+        PhotonView pv = PhotonView.Find(ID);
+        if (pv == null) return;
+        var character = pv.GetComponent<Character>();
+        if (character == null) return;
+        _characters[client] = character;
+    }
 
+    [PunRPC]
+    public void RequestMove(Player client, Vector2 dir)
+    {
+        if (_characters.ContainsKey(client))
+        {
+            var character = _characters[client];
+            character.Move(dir);
+        }
+    }
+    [PunRPC]
+    public void RequestShoot(Player client)
+    {
+        if (_characters.ContainsKey(client))
+        {
+            var character = _characters[client];
+            character.Shoot(client);
+        }
     }
 
     [PunRPC]

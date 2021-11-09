@@ -24,4 +24,8 @@ public class Character : MonoBehaviourPun
         dir = dir.normalized;
         _rb.velocity = new Vector2(dir.x * _speed, dir.y * _speed);
     }
+    public void Shoot(Player owner) 
+    {
+
+    }
 }

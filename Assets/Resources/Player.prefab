@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7747761738572475444}
   - component: {fileID: 2005047292799319504}
   - component: {fileID: 4882528792286044191}
-  - component: {fileID: 6656008010138109347}
   - component: {fileID: 6730649821886437872}
   - component: {fileID: 2418294021119653654}
   m_Layer: 0
@@ -112,7 +111,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3258100799141864342}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -150,20 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad61723fae2f0e4eb6baee98cc4e3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _nickNamePrefab: {fileID: 0}
---- !u!114 &6656008010138109347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3258100799141864342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0838b7047d1186140a34f63bbe8c1a8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _server: {fileID: 0}
+  nickNamePrefab: {fileID: 7965723315836691673, guid: 8ce8422b9c6314445bf678064841fd9f,
+    type: 3}
+  offSet: {x: 0, y: 0, z: 0}
 --- !u!114 &6730649821886437872
 MonoBehaviour:
   m_ObjectHideFlags: 0
