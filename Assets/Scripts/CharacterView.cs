@@ -6,9 +6,9 @@ using TMPro;
 
 public class CharacterView : MonoBehaviourPun
 {
-    [SerializeField] TextMeshProUGUI nickNamePrefab;
-    [SerializeField] Vector3 offSet;
-    TextMeshProUGUI _nickname;
+    [SerializeField] public TextMeshProUGUI nickNamePrefab;
+    [SerializeField] public Vector3 offSet;
+    private TextMeshProUGUI _nickname;
     Camera _camera;
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class CharacterView : MonoBehaviourPun
     }
     private void Start()
     {
-        _nickname = Instantiate<TextMeshProUGUI>(nickNamePrefab, GameObject.Find("PlayerUI").transform);
+        _nickname = Instantiate(nickNamePrefab, GameObject.Find("PlayerUI").transform);
         _nickname.text = photonView.Owner.NickName;
     }
     void Update()
