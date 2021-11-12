@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Voice.Unity;
+using Photon.Voice.PUN;
 
 public class Controller : MonoBehaviour
 {
     [SerializeField] ServerManager _server;
     private Player _localPlayer;
     private Character _character;
+    private Recorder _recorder;
     private bool _isLocked;
 
     void Start()
@@ -23,6 +26,7 @@ public class Controller : MonoBehaviour
             chatManager.OnSelect += Lock;
             chatManager.OnDeselect += UnLock;
         }
+        _recorder = PhotonVoiceNetwork.Instance.PrimaryRecorder;
     }
     void Lock()
     {
@@ -42,6 +46,17 @@ public class Controller : MonoBehaviour
         dir.x = Input.GetAxis("Horizontal");
         dir.y = Input.GetAxis("Vertical");
         _character.Move(dir);
+        if (_recorder != null)
+        {
+            if (Input.GetKey(KeyCode.V))
+            {
+                _recorder.TransmitEnabled = true;
+            }
+            else
+            {
+                _recorder.TransmitEnabled = false;
+            }
+        }
     }
 
     public Character SetCharacter

@@ -50,6 +50,12 @@ public class ServerManager : MonoBehaviourPun
         GameObject obj = PhotonNetwork.Instantiate(_prefab.name,Vector3.zero,Quaternion.identity);
         Character character = obj.GetComponent<Character>();
         _characters[client] = character;
+        int ID = character.photonView.ViewID;
+        photonView.RPC("RequestRegisterPlayer", RpcTarget.Others, client, ID);
+        ExitGames.Client.Photon.Hashtable table = new ExitGames.Client.Photon.Hashtable();
+        table["Team"] = 1;
+        client.CustomProperties = table;
+        int team = (int)client.CustomProperties["Team"];
     }
     [PunRPC]
     public void RequestGetPlayer(Player client) 
