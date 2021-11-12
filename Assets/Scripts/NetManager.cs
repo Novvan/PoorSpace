@@ -7,40 +7,41 @@ using UnityEngine.UI;
 
 public class NetManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] InputField _nickNameInput;
-    [SerializeField] Button button;
+    [SerializeField] public InputField nickNameInput;
+    [SerializeField] public Button button;
+    private bool _joinedLobby = false;
+
     private void Start()
     {
         button.interactable = false;
         PhotonNetwork.ConnectUsingSettings();
     }
-    public override void OnConnectedToMaster()
+    private void Update()
     {
-        PhotonNetwork.JoinLobby();
+        if (nickNameInput != null)
+        {
+            if (nickNameInput.text.Length > 0 && _joinedLobby) button.interactable = true;
+            else button.interactable = false;
+        }
     }
-    public override void OnJoinedLobby()
+
+    public override void OnConnectedToMaster() => PhotonNetwork.JoinLobby();
+
+    public override void OnJoinedLobby() => _joinedLobby = true;
+
+    public override void OnJoinedRoom() => PhotonNetwork.LoadLevel("Gameplay");
+
+    public void ConnectRoom()
     {
-        button.interactable = true;
-    }
-    public override void OnJoinedRoom()
-    {
-        PhotonNetwork.LoadLevel("Gameplay");
-    }
-    public void ConnectRoom() 
-    {
-        if (string.IsNullOrEmpty(_nickNameInput.text) || string.IsNullOrWhiteSpace(_nickNameInput.text)) return;
-        PhotonNetwork.NickName = _nickNameInput.text;
+        if (string.IsNullOrEmpty(nickNameInput.text) || string.IsNullOrWhiteSpace(nickNameInput.text)) return;
+        PhotonNetwork.NickName = nickNameInput.text;
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = 6;
         PhotonNetwork.JoinOrCreateRoom("Room", options, TypedLobby.Default);
         button.interactable = false;
     }
-    public override void OnCreateRoomFailed(short returnCode, string message)
-    {
-        button.interactable = true;
-    }
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        button.interactable = true;
-    }
+
+    public override void OnCreateRoomFailed(short returnCode, string message) => button.interactable = true;
+
+    public override void OnJoinRoomFailed(short returnCode, string message) => button.interactable = true;
 }
