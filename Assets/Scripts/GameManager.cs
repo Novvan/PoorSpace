@@ -11,11 +11,6 @@ public class GameManager : MonoBehaviourPun
     public int maxScore;
     Dictionary<Player, int> _scores = new Dictionary<Player, int>();
 
-    private void Awake()
-    {
-        Screen.SetResolution(1920, 1080, true);
-    }
-
     public void AddScore(Player client, int score = 1)
     {
         if (!_scores.ContainsKey(client))
