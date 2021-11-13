@@ -83,6 +83,7 @@ public class ChatManager : MonoBehaviour, IChatClientListener
         inputField.text = "";
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(inputField.gameObject);
+        DeselectChat();
     }
     public void DebugReturn(DebugLevel level, string message)
     {
