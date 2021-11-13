@@ -18,7 +18,7 @@ public class Controller : MonoBehaviour
     {
         _localPlayer = PhotonNetwork.LocalPlayer;
         Player clientServer = _server.GetServer;
-        _server.photonView.RPC("InitializedPlayer", clientServer, _localPlayer);
+        _server.photonView.RPC("InitializedPlayer", _localPlayer, _localPlayer);
         _server.photonView.RPC("RequestGetPlayer", _localPlayer, _localPlayer);
         var chatManager = FindObjectOfType<ChatManager>();
         if (chatManager)
