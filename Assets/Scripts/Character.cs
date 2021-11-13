@@ -26,6 +26,7 @@ public class Character : MonoBehaviourPun
     }
     public void Shoot(Player owner) 
     {
-
+        var temp = PhotonNetwork.Instantiate("PlayerBullet", transform.position, Quaternion.identity);
+        temp.gameObject.GetComponent<Bullet>().Owner = owner;
     }
 }

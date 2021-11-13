@@ -47,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject obj = PhotonNetwork.Instantiate(enemy.name, pos, Quaternion.identity);
         Enemy newEnemy = obj.GetComponent<Enemy>();
-        newEnemy.OnDestroyPoke += OnEnemyDestroy;
+        newEnemy.OnDestroyEnemy += OnEnemyDestroy;
         _currentEnemies++;
     }
     void OnEnemyDestroy(Enemy enemy)

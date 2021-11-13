@@ -57,6 +57,10 @@ public class Controller : MonoBehaviour
                 _recorder.TransmitEnabled = false;
             }
         }
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            _server.photonView.RPC("RequestShoot", _localPlayer, _localPlayer);
+        }
     }
 
     public Character SetCharacter
