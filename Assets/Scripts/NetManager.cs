@@ -36,7 +36,7 @@ public class NetManager : MonoBehaviourPunCallbacks
         if (string.IsNullOrEmpty(nickNameInput.text) || string.IsNullOrWhiteSpace(nickNameInput.text)) return;
         PhotonNetwork.NickName = nickNameInput.text;
         RoomOptions options = new RoomOptions();
-        options.MaxPlayers = 6;
+        options.MaxPlayers = 4;
         PhotonNetwork.JoinOrCreateRoom("Room", options, TypedLobby.Default);
         button.interactable = false;
     }

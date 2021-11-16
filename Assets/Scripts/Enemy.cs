@@ -17,11 +17,13 @@ public class Enemy : MonoBehaviourPun
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
     }
+
     private void Start()
     {
         _currentHealth = _maxHealth;
         _gm = FindObjectOfType<GameManager>();
     }
+    [PunRPC]
     public void GetDamage(float Damage, Player Instigator) 
     {
         _currentHealth -= Damage;
@@ -30,6 +32,7 @@ public class Enemy : MonoBehaviourPun
             if (_gm != null) 
             {
                 _gm.AddScore(Instigator);
+                PhotonNetwork.Destroy(gameObject);
             }
         }
     }

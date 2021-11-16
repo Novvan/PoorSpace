@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 691837750550750114}
   - component: {fileID: 6048165560127279511}
   - component: {fileID: 921603849827882649}
-  - component: {fileID: 2660636326609762375}
   - component: {fileID: 2957400050710461259}
+  - component: {fileID: 2660636326609762375}
   - component: {fileID: -3557147608316945480}
-  m_Layer: 0
+  - component: {fileID: 6127119262593894636}
+  m_Layer: 8
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -96,7 +97,7 @@ Rigidbody2D:
   m_GameObject: {fileID: 9203195059512893402}
   m_BodyType: 1
   m_Simulated: 1
-  m_UseFullKinematicContacts: 0
+  m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
@@ -123,6 +124,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 3.42, y: 1.22}
   m_Direction: 1
+--- !u!114 &2957400050710461259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203195059512893402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e262651e741951a4c8ef578e5edf81df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 100
+  _speed: 5
 --- !u!114 &2660636326609762375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,23 +158,10 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: -3557147608316945480}
+  - {fileID: 6127119262593894636}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2957400050710461259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9203195059512893402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e262651e741951a4c8ef578e5edf81df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxHealth: 0
-  _speed: 0
 --- !u!114 &-3557147608316945480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,3 +178,19 @@ MonoBehaviour:
   m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 0
   m_TeleportIfDistanceGreaterThan: 3
+--- !u!114 &6127119262593894636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9203195059512893402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

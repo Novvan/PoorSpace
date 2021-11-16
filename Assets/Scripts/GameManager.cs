@@ -8,6 +8,7 @@ using System.IO;
 
 public class GameManager : MonoBehaviourPun
 {
+    [SerializeField] private float _numberOfPlayers;
     public int maxScore;
     Dictionary<Player, int> _scores = new Dictionary<Player, int>();
 
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviourPun
             Win(client);
         }
     }
+
     public bool IsAWinner(Player client)
     {
         if (_scores.ContainsKey(client))
@@ -34,10 +36,12 @@ public class GameManager : MonoBehaviourPun
             return false;
         }
     }
+
     void Win(Player client)
     {
         photonView.RPC("PlayerWinLose", RpcTarget.All, client);
     }
+
     [PunRPC]
     public void PlayerWinLose(Player client)
     {
@@ -51,5 +55,4 @@ public class GameManager : MonoBehaviourPun
             print("Lose");
         }
     }
-
 }

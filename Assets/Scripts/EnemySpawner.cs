@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviourPun
 {
     [SerializeField] Enemy[] _enemies;
     [SerializeField] Vector2 posMin;
@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] int maxEnemies = 5;
     [SerializeField] float timeSpawn = 3;
     int _currentEnemies;
+
     void Start()
     {
         if (PhotonNetwork.IsMasterClient)

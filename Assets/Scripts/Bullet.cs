@@ -29,10 +29,16 @@ public class Bullet : MonoBehaviourPun
             _rb.velocity = transform.up * _speed;
         }
     }
-
-    private void OnTriggerEnter(Collider collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-
+        if (photonView.IsMine)
+        {
+            if (collision.gameObject.tag.ToLower() == "enemy")
+            {
+                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                enemy.photonView.RPC("GetDamage",enemy.photonView.Owner,_damage,_owner);
+                PhotonNetwork.Destroy(photonView);
+            }
+        }
     }
 }
