@@ -41,7 +41,6 @@ public class Controller : MonoBehaviour
     {
         if (_character == null) return;
         if (_isLocked) return;
-        Debug.Log(_isLocked);
         Vector2 dir = Vector2.zero;
         dir.x = Input.GetAxis("Horizontal");
         dir.y = Input.GetAxis("Vertical");

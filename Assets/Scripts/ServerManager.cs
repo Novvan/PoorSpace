@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class ServerManager : MonoBehaviourPun
 {
     [SerializeField] GameObject _prefab;
+    [SerializeField] GameObject _enemySpawner;
     Player _server;
     Dictionary<Player, Character> _characters = new Dictionary<Player, Character>();
     public Player GetServer => _server;
@@ -23,6 +24,15 @@ public class ServerManager : MonoBehaviourPun
         var character = pv.GetComponent<Character>();
         if (character == null) return;
         _characters[client] = character;
+        if (_characters.Count >= PhotonNetwork.CurrentRoom.MaxPlayers/2) 
+        {
+            photonView.RPC("StartGame", RpcTarget.All);
+        }
+    }
+    [PunRPC]
+    public void StartGame() 
+    {
+        _enemySpawner.SetActive(true);
     }
 
     [PunRPC]
