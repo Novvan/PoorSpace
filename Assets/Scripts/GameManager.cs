@@ -11,7 +11,7 @@ using System.Linq;
 public class GameManager : MonoBehaviourPun
 {
     [SerializeField] private float _numberOfPlayers;
-    [SerializeField] private float _timer;
+    [SerializeField] private float _timer = 90;
     [SerializeField] private TMP_Text _timerLabel;
     private bool _startGame = false;
 
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient && _startGame)
+        if (PhotonNetwork.IsMasterClient && _startGame && _timer > 0)
         {
             ExecuteTimer();
         }
@@ -41,26 +41,30 @@ public class GameManager : MonoBehaviourPun
     private void ExecuteTimer()
     {
         _timer -= Time.deltaTime;
-        _timerLabel.text = _timer.ToString();
 
-        if (_timer <= 0)
+        if (_timerLabel != null)
         {
-            if (!_endGame)
+            _timerLabel.text = _timer.ToString().Substring(0, 4);
+
+            if (_timer <= 0)
             {
-                _endGame = true;
-                Player maxPointClient = null;
-                int maxPoints = 0;
-
-                foreach (var item in _scores)
+                if (!_endGame)
                 {
-                    if (item.Value > maxPoints)
-                    {
-                        maxPoints = item.Value;
-                        maxPointClient = item.Key;
-                    }
-                }
+                    _endGame = true;
+                    Player maxPointClient = null;
+                    int maxPoints = 0;
 
-                Win(maxPointClient);
+                    foreach (var item in _scores)
+                    {
+                        if (item.Value > maxPoints)
+                        {
+                            maxPoints = item.Value;
+                            maxPointClient = item.Key;
+                        }
+                    }
+
+                    Win(maxPointClient);
+                }
             }
         }
     }
