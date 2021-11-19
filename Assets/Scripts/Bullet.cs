@@ -36,7 +36,7 @@ public class Bullet : MonoBehaviourPun
             if (collision.gameObject.tag.ToLower() == "enemy")
             {
                 Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                enemy.photonView.RPC("GetDamage",enemy.photonView.Owner,_damage,_owner);
+                enemy.photonView.RPC("GetDamage", enemy.photonView.Owner, _damage, _owner);
                 PhotonNetwork.Destroy(photonView);
             }
         }

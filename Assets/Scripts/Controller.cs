@@ -44,7 +44,15 @@ public class Controller : MonoBehaviour
         Vector2 dir = Vector2.zero;
         dir.x = Input.GetAxis("Horizontal");
         dir.y = Input.GetAxis("Vertical");
+
+        float curPosX = _character.transform.position.x;
+        float curPosY = _character.transform.position.y;
+
+        if ((curPosX >= 8.55f && dir.x > 0) || (curPosX <= -8.55f && dir.x < 0)) dir.x = 0;
+        if ((curPosY >= 4.55f && dir.y > 0) || (curPosY <= -4.55f && dir.y < 0)) dir.y = 0;
+
         _character.Move(dir);
+
         if (_recorder != null)
         {
             if (Input.GetKey(KeyCode.V))
@@ -56,7 +64,7 @@ public class Controller : MonoBehaviour
                 _recorder.TransmitEnabled = false;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space)) 
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             _server.photonView.RPC("RequestShoot", _localPlayer, _localPlayer);
         }
@@ -64,7 +72,7 @@ public class Controller : MonoBehaviour
 
     public Character SetCharacter
     {
-        set 
+        set
         {
             _character = value;
         }
