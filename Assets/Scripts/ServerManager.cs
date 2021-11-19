@@ -26,7 +26,7 @@ public class ServerManager : MonoBehaviourPun
         var character = pv.GetComponent<Character>();
         if (character == null) return;
         _characters[client] = character;
-        if (_characters.Count >= PhotonNetwork.CurrentRoom.MaxPlayers)
+        if (_characters.Count >= PhotonNetwork.CurrentRoom.MaxPlayers / 2)
         {
             photonView.RPC("StartGame", RpcTarget.All);
         }
