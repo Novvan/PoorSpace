@@ -36,11 +36,15 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient && _startGame && _timer > 0)
+        if (_startGame)
         {
-            ExecuteTimer();
+            photonView.RPC("UpdateTimer", RpcTarget.All, _timer);
+
+            if (PhotonNetwork.IsMasterClient && _timer > 0)
+            {
+                ExecuteTimer();
+            }
         }
-        photonView.RPC("UpdateTimer", RpcTarget.All, _timer);
     }
 
     private void ExecuteTimer()
