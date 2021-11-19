@@ -6,14 +6,16 @@ using Photon.Realtime;
 
 public class ServerManager : MonoBehaviourPun
 {
-    [SerializeField] GameObject _prefab;
-    [SerializeField] GameObject _enemySpawner;
-    Player _server;
-    Dictionary<Player, Character> _characters = new Dictionary<Player, Character>();
+    [SerializeField] private GameObject _prefab;
+    [SerializeField] private GameObject _enemySpawner;
+    private GameManager _gm;
+    private Player _server;
     public Player GetServer => _server;
+    private Dictionary<Player, Character> _characters = new Dictionary<Player, Character>();
 
     void Awake()
     {
+        _gm = FindObjectOfType<GameManager>();
         _server = PhotonNetwork.MasterClient;
     }
     [PunRPC]
@@ -32,7 +34,11 @@ public class ServerManager : MonoBehaviourPun
     [PunRPC]
     public void StartGame()
     {
-        _enemySpawner.SetActive(true);
+        if (_gm != null)
+        {
+            _gm.StartGame = true;
+            _enemySpawner.SetActive(true);
+        }
     }
 
     [PunRPC]

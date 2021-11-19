@@ -13,10 +13,13 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private float _numberOfPlayers;
     [SerializeField] private float _timer;
     [SerializeField] private TMP_Text _timerLabel;
+    private bool _startGame = false;
 
-    public int maxScore;
+    private bool _endGame = false;
+
     Dictionary<Player, int> _scores = new Dictionary<Player, int>();
-    private bool _endgame = false;
+
+    public bool StartGame { set => _startGame = value; }
 
     public void AddScore(Player client, int score = 1)
     {
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviourPun
 
     private void Update()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient && _startGame)
         {
             ExecuteTimer();
         }
@@ -42,9 +45,9 @@ public class GameManager : MonoBehaviourPun
 
         if (_timer <= 0)
         {
-            if (!_endgame)
+            if (!_endGame)
             {
-                _endgame = true;
+                _endGame = true;
                 Player maxPointClient = null;
                 int maxPoints = 0;
 

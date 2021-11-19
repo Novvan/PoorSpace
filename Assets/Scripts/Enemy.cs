@@ -16,20 +16,16 @@ public class Enemy : MonoBehaviourPun
     public myDelegate OnDestroyEnemy = delegate { };
     private void Awake()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            _rb = gameObject.GetComponent<Rigidbody2D>();
-        }
+
+        _rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
-        if (PhotonNetwork.IsMasterClient)
-        {
-            _currentHealth = _maxHealth;
-            _gm = FindObjectOfType<GameManager>();
-        }
+        _currentHealth = _maxHealth;
+        _gm = FindObjectOfType<GameManager>();
     }
+
     [PunRPC]
     public void GetDamage(float Damage, Player Instigator)
     {
