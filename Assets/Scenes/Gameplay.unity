@@ -450,7 +450,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1156726386
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -683,7 +683,7 @@ Camera:
   m_GameObject: {fileID: 1648746850}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 3
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -890,7 +890,7 @@ PrefabInstance:
     - target: {fileID: 7027002317557522401, guid: a7bbbeac11742a94a9786ab455d71c7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.0001299467
+      value: 0.0001202542
       objectReference: {fileID: 0}
     - target: {fileID: 7027002317642308926, guid: a7bbbeac11742a94a9786ab455d71c7d,
         type: 3}
