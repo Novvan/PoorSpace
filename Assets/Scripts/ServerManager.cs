@@ -24,13 +24,13 @@ public class ServerManager : MonoBehaviourPun
         var character = pv.GetComponent<Character>();
         if (character == null) return;
         _characters[client] = character;
-        if (_characters.Count >= PhotonNetwork.CurrentRoom.MaxPlayers/2) 
+        if (_characters.Count >= PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             photonView.RPC("StartGame", RpcTarget.All);
         }
     }
     [PunRPC]
-    public void StartGame() 
+    public void StartGame()
     {
         _enemySpawner.SetActive(true);
     }
@@ -57,7 +57,7 @@ public class ServerManager : MonoBehaviourPun
     [PunRPC]
     public void InitializedPlayer(Player client)
     {
-        GameObject obj = PhotonNetwork.Instantiate(_prefab.name,Vector3.zero,Quaternion.identity);
+        GameObject obj = PhotonNetwork.Instantiate(_prefab.name, Vector3.zero, Quaternion.identity);
         Character character = obj.GetComponent<Character>();
         _characters[client] = character;
         int ID = character.photonView.ViewID;
@@ -68,9 +68,9 @@ public class ServerManager : MonoBehaviourPun
         int team = (int)client.CustomProperties["Team"];
     }
     [PunRPC]
-    public void RequestGetPlayer(Player client) 
+    public void RequestGetPlayer(Player client)
     {
-        if (_characters.ContainsKey(client)) 
+        if (_characters.ContainsKey(client))
         {
             var character = _characters[client];
             int ID = character.photonView.ViewID;
