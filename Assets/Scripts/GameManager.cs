@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private float _numberOfPlayers;
     [SerializeField] private float _timer = 90;
     [SerializeField] private TMP_Text _timerLabel;
+    [SerializeField] private GameObject _winObject;
+    [SerializeField] private GameObject _loseObject;
+
+
     private bool _startGame = false;
 
     private bool _endGame = false;
@@ -36,50 +40,44 @@ public class GameManager : MonoBehaviourPun
         {
             ExecuteTimer();
         }
+        photonView.RPC("UpdateTimer", RpcTarget.All, _timer);
     }
 
     private void ExecuteTimer()
     {
         _timer -= Time.deltaTime;
 
-        if (_timerLabel != null)
+        if (_timer <= 0)
         {
-            _timerLabel.text = _timer.ToString().Substring(0, 4);
-
-            if (_timer <= 0)
+            if (!_endGame)
             {
-                if (!_endGame)
+                _endGame = true;
+                Player maxPointClient = null;
+                int maxPoints = 0;
+
+                foreach (var item in _scores)
                 {
-                    _endGame = true;
-                    Player maxPointClient = null;
-                    int maxPoints = 0;
-
-                    foreach (var item in _scores)
+                    if (item.Value > maxPoints)
                     {
-                        if (item.Value > maxPoints)
-                        {
-                            maxPoints = item.Value;
-                            maxPointClient = item.Key;
-                        }
+                        maxPoints = item.Value;
+                        maxPointClient = item.Key;
                     }
-
-                    Win(maxPointClient);
                 }
+
+                Win(maxPointClient);
             }
         }
     }
 
-    // public bool IsAWinner(Player client)
-    // {
-    //     if (_scores.ContainsKey(client))
-    //     {
-    //         return _scores[client] >= maxScore;
-    //     }
-    //     else
-    //     {
-    //         return false;
-    //     }
-    // }
+    [PunRPC]
+    public void UpdateTimer(float tmr)
+    {
+        if (_timerLabel != null)
+        {
+            _timerLabel.text = tmr.ToString().Substring(0, 4);
+
+        }
+    }
 
     void Win(Player client)
     {
@@ -89,14 +87,21 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void PlayerWinLose(Player client)
     {
+        photonView.RPC("StopGame", RpcTarget.All);
+
         if (PhotonNetwork.LocalPlayer == client)
         {
-            print("GANASTE");
+            _winObject.SetActive(true);
         }
         else
         {
-            Application.Quit(1);
-            print("Lose");
+            _loseObject.SetActive(true);
         }
+    }
+
+
+    public void QuitGame()
+    {
+        Application.Quit(1);
     }
 }

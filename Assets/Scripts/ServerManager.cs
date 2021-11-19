@@ -42,6 +42,16 @@ public class ServerManager : MonoBehaviourPun
     }
 
     [PunRPC]
+    public void StopGame()
+    {
+        if (_gm != null)
+        {
+            _gm.StartGame = false;
+            _enemySpawner.SetActive(false);
+        }
+    }
+
+    [PunRPC]
     public void RequestMove(Player client, Vector2 dir)
     {
         if (_characters.ContainsKey(client))
