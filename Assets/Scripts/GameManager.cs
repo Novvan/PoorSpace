@@ -5,12 +5,18 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
 using System.IO;
+using TMPro;
+using System.Linq;
 
 public class GameManager : MonoBehaviourPun
 {
     [SerializeField] private float _numberOfPlayers;
+    [SerializeField] private float _timer;
+    [SerializeField] private TMP_Text _timerLabel;
+
     public int maxScore;
     Dictionary<Player, int> _scores = new Dictionary<Player, int>();
+    private bool _endgame = false;
 
     public void AddScore(Player client, int score = 1)
     {
@@ -19,23 +25,54 @@ public class GameManager : MonoBehaviourPun
             _scores[client] = 0;
         }
         _scores[client] += score;
-        if (IsAWinner(client))
+    }
+
+    private void Update()
+    {
+        if (PhotonNetwork.IsMasterClient)
         {
-            Win(client);
+            ExecuteTimer();
         }
     }
 
-    public bool IsAWinner(Player client)
+    private void ExecuteTimer()
     {
-        if (_scores.ContainsKey(client))
+        _timer -= Time.deltaTime;
+        _timerLabel.text = _timer.ToString();
+
+        if (_timer <= 0)
         {
-            return _scores[client] >= maxScore;
-        }
-        else
-        {
-            return false;
+            if (!_endgame)
+            {
+                _endgame = true;
+                Player maxPointClient = null;
+                int maxPoints = 0;
+
+                foreach (var item in _scores)
+                {
+                    if (item.Value > maxPoints)
+                    {
+                        maxPoints = item.Value;
+                        maxPointClient = item.Key;
+                    }
+                }
+
+                Win(maxPointClient);
+            }
         }
     }
+
+    // public bool IsAWinner(Player client)
+    // {
+    //     if (_scores.ContainsKey(client))
+    //     {
+    //         return _scores[client] >= maxScore;
+    //     }
+    //     else
+    //     {
+    //         return false;
+    //     }
+    // }
 
     void Win(Player client)
     {
