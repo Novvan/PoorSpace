@@ -52,8 +52,9 @@ public class Enemy : MonoBehaviourPun
 
     public void Move(float dirx)
     {
-        float curDirX = _direction;
-        if ((curDirX >= 8.55f && _direction > 0) || (curDirX <= -8.55f && _direction < 0)) _direction = _direction * -1;
+        float curPosX = gameObject.transform.position.x;
+
+        if ((curPosX >= 8.55f && _direction > 0) || (curPosX <= -8.55f && _direction < 0)) _direction = _direction * -1;
         else
         {
             _rb.velocity = new Vector2(dirx * _speed, 0);
