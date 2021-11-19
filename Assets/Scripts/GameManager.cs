@@ -8,7 +8,6 @@ using System.IO;
 
 public class GameManager : MonoBehaviourPun
 {
-    [SerializeField] private float _numberOfPlayers;
     public int maxScore;
     Dictionary<Player, int> _scores = new Dictionary<Player, int>();
 
