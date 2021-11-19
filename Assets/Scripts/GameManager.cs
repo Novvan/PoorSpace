@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviourPun
         if (_timerLabel != null)
         {
             _timerLabel.text = tmr.ToString().Substring(0, 4);
-
         }
     }
 
