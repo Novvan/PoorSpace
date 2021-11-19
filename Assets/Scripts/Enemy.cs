@@ -46,16 +46,18 @@ public class Enemy : MonoBehaviourPun
         }
         else
         {
-            _direction = Random.Range(-2, 2);
+            _direction = Random.Range(-1, 1);
         }
     }
 
     public void Move(float dirx)
     {
         float curDirX = _direction;
-        if (curDirX >= 8.55f || curDirX <= -8.55f) _direction = -_direction;
-
-        _rb.velocity = new Vector2(dirx * _speed, 0);
+        if ((curDirX >= 8.55f && _direction > 0) || (curDirX <= -8.55f && _direction < 0)) _direction = _direction * -1;
+        else
+        {
+            _rb.velocity = new Vector2(dirx * _speed, 0);
+        }
     }
 
     private void OnDestroy()
