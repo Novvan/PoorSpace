@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class NetManager : MonoBehaviourPunCallbacks
 {
+    [SerializeField] private byte _maxPlayers;
     [SerializeField] public InputField nickNameInput;
+
     [SerializeField] public Button button;
     private bool _joinedLobby = false;
 
@@ -36,7 +38,7 @@ public class NetManager : MonoBehaviourPunCallbacks
         if (string.IsNullOrEmpty(nickNameInput.text) || string.IsNullOrWhiteSpace(nickNameInput.text)) return;
         PhotonNetwork.NickName = nickNameInput.text;
         RoomOptions options = new RoomOptions();
-        options.MaxPlayers = 4;
+        options.MaxPlayers = _maxPlayers;
         PhotonNetwork.JoinOrCreateRoom("Room", options, TypedLobby.Default);
         button.interactable = false;
     }

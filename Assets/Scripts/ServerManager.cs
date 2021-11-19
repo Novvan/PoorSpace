@@ -18,6 +18,7 @@ public class ServerManager : MonoBehaviourPun
         _gm = FindObjectOfType<GameManager>();
         _server = PhotonNetwork.MasterClient;
     }
+
     [PunRPC]
     public void RequestRegisterPlayer(Player client, int ID)
     {
@@ -31,6 +32,7 @@ public class ServerManager : MonoBehaviourPun
             photonView.RPC("StartGame", RpcTarget.All);
         }
     }
+
     [PunRPC]
     public void StartGame()
     {
@@ -60,6 +62,7 @@ public class ServerManager : MonoBehaviourPun
             character.Move(dir);
         }
     }
+
     [PunRPC]
     public void RequestShoot(Player client)
     {
@@ -83,6 +86,7 @@ public class ServerManager : MonoBehaviourPun
         client.CustomProperties = table;
         int team = (int)client.CustomProperties["Team"];
     }
+
     [PunRPC]
     public void RequestGetPlayer(Player client)
     {
@@ -93,6 +97,7 @@ public class ServerManager : MonoBehaviourPun
             photonView.RPC("SetPlayer", client, ID);
         }
     }
+
     [PunRPC]
     public void SetPlayer(int ID)
     {

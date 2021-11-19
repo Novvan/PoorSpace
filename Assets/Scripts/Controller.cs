@@ -51,7 +51,7 @@ public class Controller : MonoBehaviour
         if ((curPosX >= 8.55f && dir.x > 0) || (curPosX <= -8.55f && dir.x < 0)) dir.x = 0;
         if ((curPosY >= 4.55f && dir.y > 0) || (curPosY <= -4.55f && dir.y < 0)) dir.y = 0;
 
-        _character.Move(dir);
+        _server.photonView.RPC("RequestMove", _server.GetServer, _localPlayer, dir);
 
         if (_recorder != null)
         {
@@ -64,9 +64,10 @@ public class Controller : MonoBehaviour
                 _recorder.TransmitEnabled = false;
             }
         }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _server.photonView.RPC("RequestShoot", _localPlayer, _localPlayer);
+            _server.photonView.RPC("RequestShoot", _server.GetServer, _localPlayer);
         }
     }
 

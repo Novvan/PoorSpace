@@ -42,17 +42,17 @@ public class Enemy : MonoBehaviourPun
 
     private void Update()
     {
-        // if (PhotonNetwork.IsMasterClient)
-        // {
-        if (_direction != 0)
+        if (PhotonNetwork.IsMasterClient)
         {
-            Move(_direction);
+            if (_direction != 0)
+            {
+                Move(_direction);
+            }
+            else
+            {
+                _direction = Random.Range(-1, 1);
+            }
         }
-        else
-        {
-            _direction = Random.Range(-1, 1);
-        }
-        // }
     }
 
     public void Move(float dirx)

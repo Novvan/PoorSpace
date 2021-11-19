@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviourPun
 
 
     private bool _startGame = false;
-
     private bool _endGame = false;
 
     Dictionary<Player, int> _scores = new Dictionary<Player, int>();
