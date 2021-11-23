@@ -24,6 +24,7 @@ public class ChatManager : MonoBehaviour, IChatClientListener
     Dictionary<string, int> _chatDic = new Dictionary<string, int>();
     int _currentChat;
     float _limitScrollAutomation = 0.2f;
+
     void Start()
     {
         if (!PhotonNetwork.IsConnected) return;
@@ -34,10 +35,12 @@ public class ChatManager : MonoBehaviour, IChatClientListener
         _chatClient = new ChatClient(this);
         _chatClient.Connect(PhotonNetwork.PhotonServerSettings.AppSettings.AppIdChat, PhotonNetwork.AppVersion, new AuthenticationValues(PhotonNetwork.LocalPlayer.NickName));
     }
+
     void Update()
     {
-        _chatClient.Service();//Update Chat
+        _chatClient.Service();
     }
+
     void UpdateChatUI()
     {
         content.text = _chats[_currentChat];
@@ -50,11 +53,13 @@ public class ChatManager : MonoBehaviour, IChatClientListener
             StartCoroutine(WaitToScroll());
         }
     }
+
     IEnumerator WaitToScroll()
     {
         yield return new WaitForEndOfFrame();
         scroll.verticalNormalizedPosition = 0;
     }
+
     IEnumerator WaitToDeleteLine()
     {
         yield return new WaitForEndOfFrame();
@@ -65,6 +70,7 @@ public class ChatManager : MonoBehaviour, IChatClientListener
         }
         content.text = _chats[_currentChat];
     }
+
     public void SendChat()
     {
         if (string.IsNullOrEmpty(inputField.text) || string.IsNullOrWhiteSpace(inputField.text)) return;
@@ -83,8 +89,8 @@ public class ChatManager : MonoBehaviour, IChatClientListener
         inputField.text = "";
         EventSystem.current.SetSelectedGameObject(null);
         EventSystem.current.SetSelectedGameObject(inputField.gameObject);
-        DeselectChat();
     }
+
     public void DebugReturn(DebugLevel level, string message)
     {
     }

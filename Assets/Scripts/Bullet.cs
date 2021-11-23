@@ -16,8 +16,8 @@ public class Bullet : MonoBehaviourPun
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
         if (!photonView.IsMine) Destroy(this);
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()

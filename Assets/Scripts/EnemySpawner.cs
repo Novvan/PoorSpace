@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviourPun
         {
             StartCoroutine(WaitToSpawn(timeSpawn));
         }
+        else Destroy(this);
     }
 
     public Enemy GetEnemyRandom(Enemy[] enemies)
