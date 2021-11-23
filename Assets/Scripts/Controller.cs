@@ -50,6 +50,14 @@ public class Controller : MonoBehaviour
 
         if ((curPosX >= 8.55f && dir.x > 0) || (curPosX <= -8.55f && dir.x < 0)) dir.x = 0;
         if ((curPosY >= 4.55f && dir.y > 0) || (curPosY <= -4.55f && dir.y < 0)) dir.y = 0;
+        if (dir.x != 0 || dir.y != 0)
+        {
+            _character.Anim.SetBool("moving", true);
+        }
+        else 
+        {
+            _character.Anim.SetBool("moving", false);
+        }
 
         _server.photonView.RPC("RequestMove", _server.GetServer, _localPlayer, dir);
 

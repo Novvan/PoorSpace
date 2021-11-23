@@ -8,10 +8,15 @@ public class Character : MonoBehaviourPun
 {
     [SerializeField] private float _speed;
     private Rigidbody2D _rb;
+    private Animator _anim;
+
+    public Animator Anim { get => _anim; set => _anim = value; }
+
     // Start is called before the first frame update
     void Awake()
     {
         _rb = gameObject.GetComponent<Rigidbody2D>();
+        Anim = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
