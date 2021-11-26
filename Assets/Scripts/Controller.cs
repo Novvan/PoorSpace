@@ -28,6 +28,7 @@ public class Controller : MonoBehaviour
             chatManager.OnDeselect += UnLock;
         }
         _recorder = PhotonVoiceNetwork.Instance.PrimaryRecorder;
+        _recorder.TransmitEnabled = false;
     }
     void Lock()
     {

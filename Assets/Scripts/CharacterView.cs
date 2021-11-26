@@ -34,7 +34,8 @@ public class CharacterView : MonoBehaviourPun
 
     public void SetTalkingImage(bool active)
     {
-        image.SetActive(active);
+        if (image != null) image.SetActive(active);
+        else Debug.Log("no encuentra image");
     }
 
     void OnDestroy()
