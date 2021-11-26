@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviourPun
     [SerializeField] private TMP_Text _timerLabel;
     [SerializeField] private GameObject _winObject;
     [SerializeField] private GameObject _loseObject;
+    [SerializeField] private ServerManager _server;
 
 
     private bool _startGame = false;
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient && _startGame && _timer > 0)
         {
             ExecuteTimer();
-            photonView.RPC("UpdateTimer", RpcTarget.AllBufferedViaServer, _timer);
+            photonView.RPC("UpdateTimer", RpcTarget.All, _timer);
         }
     }
 
@@ -86,7 +87,7 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void PlayerWinLose(Player client)
     {
-        photonView.RPC("StopGame", RpcTarget.All);
+        _server.photonView.RPC("StopGame", RpcTarget.All);
 
         if (PhotonNetwork.LocalPlayer == client)
         {

@@ -105,8 +105,11 @@ public class ServerManager : MonoBehaviourPun
         if (pv == null) return;
         var character = pv.GetComponent<Character>();
         if (character == null) return;
+        var characterView = pv.GetComponent<CharacterView>();
+        if (characterView == null) return;
         var controller = GameObject.FindObjectOfType<Controller>();
         if (controller == null) return;
         controller.SetCharacter = character;
+        controller.SetCharacterView = characterView;
     }
 }

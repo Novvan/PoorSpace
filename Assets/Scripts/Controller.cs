@@ -11,6 +11,7 @@ public class Controller : MonoBehaviour
     [SerializeField] ServerManager _server;
     private Player _localPlayer;
     private Character _character;
+    private CharacterView _characterView;
     private Recorder _recorder;
     private bool _isLocked;
 
@@ -66,10 +67,12 @@ public class Controller : MonoBehaviour
             if (Input.GetKey(KeyCode.V))
             {
                 _recorder.TransmitEnabled = true;
+                _characterView.image.SetActive(true);
             }
             else
             {
                 _recorder.TransmitEnabled = false;
+                if(_characterView!= null) _characterView.image.SetActive(false);
             }
         }
 
@@ -84,6 +87,13 @@ public class Controller : MonoBehaviour
         set
         {
             _character = value;
+        }
+    }
+    public CharacterView SetCharacterView 
+    {
+        set 
+        {
+            _characterView = value;
         }
     }
 }

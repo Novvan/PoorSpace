@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using TMPro;
+using UnityEngine.UI;
 
 public class CharacterView : MonoBehaviourPun
 {
     [SerializeField] public TextMeshProUGUI nickNamePrefab;
     [SerializeField] public Vector3 offSet;
+    //[SerializeField] public
     private TextMeshProUGUI _nickname;
+    public GameObject image;
     Camera _camera;
 
     private void Awake()
@@ -20,6 +23,8 @@ public class CharacterView : MonoBehaviourPun
     {
         _nickname = Instantiate(nickNamePrefab, GameObject.Find("PlayerUI").transform);
         _nickname.text = photonView.Owner.NickName;
+        image = _nickname.gameObject.transform.Find("Image").gameObject;
+        
     }
 
     void Update()
