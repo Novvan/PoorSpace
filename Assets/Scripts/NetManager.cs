@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class NetManager : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private byte _maxPlayers;
+    [SerializeField] private byte _maxPlayers = 4;
     [SerializeField] public InputField nickNameInput;
 
     [SerializeField] public Button button;

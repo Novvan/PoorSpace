@@ -16,7 +16,6 @@ public class Enemy : MonoBehaviourPun
     public myDelegate OnDestroyEnemy = delegate { };
     private void Awake()
     {
-
         _rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
