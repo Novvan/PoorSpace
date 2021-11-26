@@ -112,4 +112,14 @@ public class ServerManager : MonoBehaviourPun
         controller.SetCharacter = character;
         controller.SetCharacterView = characterView;
     }
+
+    [PunRPC]
+    public void Talking(Player client, bool active)
+    {
+        if (_characters.ContainsKey(client))
+        {
+            var character = _characters[client];
+            character.gameObject.GetComponent<CharacterView>().SetTalkingImage(active);
+        }
+    }
 }

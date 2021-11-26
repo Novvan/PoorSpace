@@ -32,6 +32,11 @@ public class CharacterView : MonoBehaviourPun
         _nickname.transform.position = _camera.WorldToScreenPoint(transform.position + offSet);
     }
 
+    public void SetTalkingImage(bool active)
+    {
+        image.SetActive(active);
+    }
+
     void OnDestroy()
     {
         if (_nickname != null)

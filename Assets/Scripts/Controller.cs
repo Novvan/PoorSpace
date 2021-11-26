@@ -67,12 +67,12 @@ public class Controller : MonoBehaviour
             if (Input.GetKey(KeyCode.V))
             {
                 _recorder.TransmitEnabled = true;
-                _characterView.image.SetActive(true);
+                _server.photonView.RPC("Talking", RpcTarget.MasterClient, _localPlayer, true);
             }
             else
             {
                 _recorder.TransmitEnabled = false;
-                if(_characterView!= null) _characterView.image.SetActive(false);
+                _server.photonView.RPC("Talking", RpcTarget.MasterClient, _localPlayer, false);
             }
         }
 
@@ -81,6 +81,7 @@ public class Controller : MonoBehaviour
             _server.photonView.RPC("RequestShoot", _server.GetServer, _localPlayer);
         }
     }
+    
 
     public Character SetCharacter
     {
