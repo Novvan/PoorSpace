@@ -59,7 +59,7 @@ public class Controller : MonoBehaviour
             _character.Anim.SetBool("moving", false);
         }
 
-        _server.photonView.RPC("RequestMove", _server.GetServer, _localPlayer, dir);
+        _server.photonView.RPC("RequestMove", _localPlayer, _localPlayer, dir);
 
         if (_recorder != null)
         {

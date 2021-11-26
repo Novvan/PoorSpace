@@ -11,7 +11,7 @@ using System.Linq;
 public class GameManager : MonoBehaviourPun
 {
     [SerializeField] private float _numberOfPlayers;
-    [SerializeField] private float _timer = 90;
+    [SerializeField] private float _timer;
     [SerializeField] private TMP_Text _timerLabel;
     [SerializeField] private GameObject _winObject;
     [SerializeField] private GameObject _loseObject;
@@ -38,8 +38,8 @@ public class GameManager : MonoBehaviourPun
         if (PhotonNetwork.IsMasterClient && _startGame && _timer > 0)
         {
             ExecuteTimer();
+            photonView.RPC("UpdateTimer", RpcTarget.AllBufferedViaServer, _timer);
         }
-        photonView.RPC("UpdateTimer", RpcTarget.All, _timer);
     }
 
     private void ExecuteTimer()
@@ -71,9 +71,10 @@ public class GameManager : MonoBehaviourPun
     [PunRPC]
     public void UpdateTimer(float tmr)
     {
+        int _tmr = ((int)tmr);
         if (_timerLabel != null)
         {
-            _timerLabel.text = tmr.ToString().Substring(0, 4);
+            _timerLabel.text = _tmr.ToString();
         }
     }
 
