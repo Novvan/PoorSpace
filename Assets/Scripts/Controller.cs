@@ -69,7 +69,7 @@ public class Controller : MonoBehaviour
                 _recorder.TransmitEnabled = true;
                 _server.photonView.RPC("Talking", RpcTarget.MasterClient, _localPlayer, true);
             }
-            else
+            else if(Input.GetKeyUp(KeyCode.V))
             {
                 _recorder.TransmitEnabled = false;
                 _server.photonView.RPC("Talking", RpcTarget.MasterClient, _localPlayer, false);
