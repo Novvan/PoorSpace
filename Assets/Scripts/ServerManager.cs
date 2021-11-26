@@ -119,7 +119,12 @@ public class ServerManager : MonoBehaviourPun
         if (_characters.ContainsKey(client))
         {
             var character = _characters[client];
-            character.gameObject.GetComponent<CharacterView>().SetTalkingImage(active);
+            
+            if (PhotonNetwork.LocalPlayer != client) 
+            {
+                character.gameObject.GetComponent<CharacterView>().SetTalkingImage(active);
+            }
+            
         }
     }
 }
