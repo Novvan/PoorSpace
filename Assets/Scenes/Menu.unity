@@ -1702,6 +1702,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 0}
+  _enemySpawner: {fileID: 0}
 --- !u!1 &1937010699
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e397723cff7afb5419a2e038e610705f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxPlayers: 4
   nickNameInput: {fileID: 114940147301511952}
   button: {fileID: 114033082706457252}
 --- !u!4 &1937010701
